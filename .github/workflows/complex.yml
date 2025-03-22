@@ -1,0 +1,33 @@
+name: Multi-OS Jobs
+
+on: push
+
+jobs:
+  job1:
+    name: Ubuntu Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Date on Ubuntu
+        run: date
+
+  job2:
+    name: Windows Job
+    runs-on: windows-latest
+    steps:
+      - name: Print Date on Windows
+        run: Get-Date
+
+  job3:
+    name: macOS Job
+    runs-on: macos-latest
+    steps:
+      - name: Print Date on macOS
+        run: date
+
+  job4:
+    name: Dependent Job
+    runs-on: ubuntu-latest
+    needs: [job1, job2, job3]  # Waits for all 3 jobs to complete
+    steps:
+      - name: All Jobs Completed
+        run: echo "All jobs finished successfully!"
